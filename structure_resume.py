@@ -33,9 +33,21 @@ resume_tool = {
                     },
                     "required": ["title", "employer", "start_date"]
                 }
+            },
+            "education": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "degree": {"type": "string"},
+                        "institution": {"type": "string"},
+                        "graduation_date": {"type": ["string", "null"], "description": "Format as 'Month YYYY' if the month is known. If only a year is given, use 'January YYYY' as a placeholder month. Null only if no date is given at all."}
+                    },
+                    "required": ["degree", "institution"]
+                }
             }
         },
-        "required": ["full_name", "email", "phone", "skills", "job_history", "summary"]
+        "required": ["full_name", "email", "phone", "skills", "job_history", "summary", "education"]
     }
 }
 

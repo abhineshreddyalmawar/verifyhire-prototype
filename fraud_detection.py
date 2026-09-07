@@ -109,7 +109,7 @@ Job History: {job_history}
 {career_context}
 
 Check for:
-1. A technology claimed that didn't exist yet at the time of a job (technology_predates_release)
+1. A technology claimed that didn't exist yet at the time of a job (technology_predates_release) — only flag if the technology could NOT plausibly have been used at ANY point in the candidate's career. If it could plausibly have been used later in their career (even if not in their earliest roles), do NOT create a flag entry.
 2. A claimed duration in the summary or skills that EXCEEDS the career span (implausible_duration) — only flag OVERSTATED experience. If the claimed duration is EQUAL TO or LESS THAN the actual career span, this is not an issue at all — do not create a flag entry for it, do not mention it, treat it exactly as if it were never noticed.
 
 Only flag genuine issues. If everything is plausible, return an empty flags list."""
@@ -158,7 +158,7 @@ def check_title_progression_flags(job_history):
 
 Progression data: {progression_data}
 
-A fast promotion is not automatically suspicious — context like company size or exceptional performance can explain it. Only flag transitions that would genuinely warrant a closer look, and explain your reasoning for the confidence level you assign.
+A fast promotion is not automatically suspicious — context like company size or exceptional performance can explain it. Only flag transitions that would genuinely warrant a closer look, and explain your reasoning for the confidence level you assign. If you conclude a transition does NOT warrant scrutiny, do NOT create a flag entry for it at all — do not include it "for completeness" or as a non-issue.
 
 If everything looks reasonable, return an empty flags list."""
 

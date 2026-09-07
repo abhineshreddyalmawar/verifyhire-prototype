@@ -84,6 +84,7 @@ Candidate resume:
 Skills: {resume_data['skills']}
 Summary: {resume_data['summary']}
 Job history: {resume_data['job_history']}
+Education: {resume_data['education']}
 
 Job requirements:
 Required skills: {job_description['required_skills']}
@@ -91,11 +92,13 @@ Preferred skills: {job_description['preferred_skills']}
 Minimum experience (years): {job_description['min_experience_years']}
 Keywords: {job_description['keywords']}
 
-Score each category 0-100, with a short explanation for each:
-- required_skills_match / required_skills_explanation
-- preferred_skills_match / preferred_skills_explanation
-- experience_match / experience_explanation
-- keyword_match / keyword_explanation"""
+Score:
+- required_skills_match: how well the candidate's skills cover the required list
+- preferred_skills_match: how well the candidate's skills, and any relevant education (e.g. a degree explicitly listed as preferred), cover the preferred list
+- experience_match: whether the candidate's career length meets the minimum (if stated)
+- keyword_match: how many of the job's keywords appear in the candidate's resume
+
+Explain your reasoning."""
 
     response = client.messages.create(
         model="claude-sonnet-4-6",

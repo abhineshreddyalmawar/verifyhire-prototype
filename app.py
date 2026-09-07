@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from coordinator import process_candidates
 import os
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route("/")
 def home():
@@ -22,7 +23,14 @@ def analyze():
 
     results = process_candidates(resume_paths, job_description_text)
 
+    session["results"] = results
+    return redirect(url_for("show_results"))
+
+@app.route("/results")
+def show_results():
+    results = session.get("results")
     return render_template("index.html", results=results)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5001, threaded=True)
+    
